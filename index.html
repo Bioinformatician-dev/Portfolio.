@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salma Hafeez</title>
+<meta name="description" content="Salma Hafeez, bioinformatician. Single-cell and bulk RNA-seq pipelines, multi-omics integration and machine learning for cancer genomics.">
+<meta name="theme-color" content="#f6f7f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1110" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS  (one accent: teal, cool zinc neutrals, radius 14/pill)
+   ============================================================ */
+:root{
+  --bg:#f6f7f7; --surface:#ffffff; --surface-2:#eef1f1;
+  --ink:#121615; --ink-2:#47504e; --ink-3:#6b7472;
+  --line:#dde2e1; --accent:#0F5B57; --accent-ink:#ffffff;
+  --accent-soft:#d8ebe9; --dot:#9aa5a3; --shadow:0 18px 50px -24px rgba(15,91,87,.28);
+  --r:14px; --maxw:1200px; color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1110; --surface:#141a19; --surface-2:#1a2221;
+    --ink:#e8eeec; --ink-2:#a9b4b1; --ink-3:#86918e;
+    --line:#26302e; --accent:#4fb8ae; --accent-ink:#06201e;
+    --accent-soft:#16312e; --dot:#3d4846; --shadow:0 18px 50px -24px rgba(0,0,0,.6); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1110; --surface:#141a19; --surface-2:#1a2221;
+  --ink:#e8eeec; --ink-2:#a9b4b1; --ink-3:#86918e;
+  --line:#26302e; --accent:#4fb8ae; --accent-ink:#06201e;
+  --accent-soft:#16312e; --dot:#3d4846; --shadow:0 18px 50px -24px rgba(0,0,0,.6); color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 "Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.ic{width:1.15em;height:1.15em;flex:none;fill:currentColor;vertical-align:-.18em}
+a,button,.chip,.atlas canvas{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+img,canvas{display:block;max-width:100%}
+.mono{font-family:"Geist Mono",ui-monospace,monospace}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
+@media (min-width:768px){.wrap{padding:0 32px}}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:var(--accent-ink);padding:8px 14px;border-radius:999px;z-index:30}
+.skip:focus{left:16px}
+h2{font-size:clamp(1.75rem,3.4vw,2.6rem);line-height:1.1;letter-spacing:-.03em;font-weight:600;text-wrap:balance}
+.lede{color:var(--ink-2);max-width:62ch}
+section{scroll-margin-top:80px}
+
+/* ---------- NAV ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.scrolled{border-bottom-color:var(--line)}
+.nav .wrap{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:600;letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
+.nav ul{display:none;list-style:none;gap:4px}
+@media (min-width:900px){.nav ul{display:flex}}
+.nav ul a{text-decoration:none;color:var(--ink-2);font-size:14.5px;padding:8px 12px;border-radius:999px;transition:color .2s,background .2s}
+.nav ul a:hover,.nav ul a[aria-current="true"]{color:var(--ink);background:var(--surface-2)}
+.nav-r{display:flex;align-items:center;gap:8px}
+.icon-btn .ic{width:18px;height:18px}
+.icon-btn{width:40px;height:40px;display:grid;place-items:center;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-size:18px;transition:transform .15s,background .2s}
+.icon-btn:hover{background:var(--surface-2)}
+.icon-btn:active{transform:scale(.96)}
+
+/* ---------- BUTTONS ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 20px;border-radius:999px;font:500 15px "Geist",sans-serif;text-decoration:none;white-space:nowrap;cursor:pointer;border:1px solid transparent;transition:transform .15s cubic-bezier(.16,1,.3,1),background .2s,box-shadow .2s}
+.btn:active{transform:translateY(1px) scale(.985)}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:var(--shadow)}
+.btn-primary:hover{background:color-mix(in srgb,var(--accent) 88%,var(--ink))}
+.btn-ghost{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{background:var(--surface-2)}
+.btn .ic{width:18px;height:18px}
+
+/* ---------- HERO (asymmetric split + live UMAP) ---------- */
+.hero{padding-block:64px 88px}
+.hero .wrap{display:grid;gap:40px;align-items:center}
+@media (min-width:1024px){.hero .wrap{grid-template-columns:5fr 6fr;gap:48px}}
+.hero h1{font-size:clamp(2.6rem,6vw,4.4rem);line-height:1.02;letter-spacing:-.045em;font-weight:600}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{margin-top:20px;font-size:clamp(1.05rem,1.6vw,1.2rem);color:var(--ink-2);max-width:42ch}
+.hero .ctas{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
+.role{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-3);margin-bottom:22px}
+.atlas{position:relative;aspect-ratio:1.12/1;width:100%;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);overflow:hidden;box-shadow:var(--shadow)}
+.atlas canvas{width:100%;height:100%;touch-action:none}
+.atlas-cap{position:absolute;left:16px;bottom:14px;right:16px;display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--ink-3);pointer-events:none}
+.atlas-tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);padding:10px 12px;border-radius:10px;font-size:13px;line-height:1.45;max-width:230px;opacity:0;transform:translateY(4px);transition:opacity .18s,transform .18s}
+.atlas-tip.on{opacity:1;transform:none}
+.atlas-tip b{display:block;font-weight:600;margin-bottom:2px}
+
+/* ---------- ABOUT (big statement + number row) ---------- */
+.about{padding:96px 0;border-top:1px solid var(--line)}
+.statement{font-size:clamp(1.5rem,3vw,2.3rem);line-height:1.25;letter-spacing:-.025em;font-weight:500;max-width:28ch;text-wrap:balance}
+.statement span{color:var(--ink-3)}
+.figs{margin-top:56px;display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+@media (min-width:768px){.figs{grid-template-columns:repeat(4,1fr)}}
+.fig b{display:block;font:600 clamp(2.2rem,4vw,3rem)/1 "Geist",sans-serif;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.fig span{display:block;margin-top:10px;font-size:14px;color:var(--ink-2);max-width:20ch}
+
+/* ---------- WORK (featured bento + live repo index) ---------- */
+.work{padding:96px 0;background:var(--surface);border-block:1px solid var(--line)}
+.bento{margin-top:40px;display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:768px){.bento{grid-template-columns:repeat(6,1fr)}
+  .bento .c1{grid-column:span 4}.bento .c2{grid-column:span 2}
+  .bento .c3{grid-column:span 2}.bento .c4{grid-column:span 4}}
+.tile{position:relative;display:flex;flex-direction:column;border-radius:var(--r);border:1px solid var(--line);background:var(--bg);overflow:hidden;text-decoration:none;min-height:300px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .35s}
+.tile:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+.tile canvas{flex:1;min-height:160px;width:100%}
+.tile .meta{padding:18px 20px 20px;border-top:1px solid var(--line);background:var(--surface)}
+.tile h3{font-size:1.1rem;font-weight:600;letter-spacing:-.015em;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tile h3 .ic{color:var(--ink-3);transition:transform .3s,color .3s}
+.tile:hover h3 .ic{transform:translate(3px,-3px);color:var(--accent)}
+.tile p{margin-top:6px;font-size:14.5px;color:var(--ink-2)}
+.tile .tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+.tag{font:500 12px "Geist Mono",monospace;padding:4px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-2)}
+.tile.c1{background:var(--accent-soft)}
+.tile.c4{background:linear-gradient(135deg,var(--accent-soft),var(--bg) 70%)}
+
+.index-head{margin-top:80px;display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px}
+.index-head h3{font-size:1.4rem;letter-spacing:-.02em;font-weight:600}
+.index-head .status{font-size:13px;color:var(--ink-3)}
+.controls{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:12.5px;color:var(--ink-2)}
+.search{height:42px;min-width:240px;padding:0 14px 0 38px;border-radius:999px;border:1px solid var(--line);background:var(--bg) no-repeat 14px center;color:var(--ink);font:inherit;font-size:15px}
+.search-wrap{position:relative}
+.search-wrap .ic{position:absolute;left:14px;bottom:12px;color:var(--ink-3);pointer-events:none}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chip{height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink-2);font:500 13px "Geist",sans-serif;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s,border-color .2s}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.repos{margin-top:24px;display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:700px){.repos{grid-template-columns:1fr 1fr}}
+@media (min-width:1080px){.repos{grid-template-columns:1fr 1fr 1fr}}
+.repo{display:flex;flex-direction:column;gap:8px;padding:16px 18px;border-radius:var(--r);background:var(--bg);border:1px solid var(--line);text-decoration:none;transition:border-color .25s,transform .25s cubic-bezier(.16,1,.3,1)}
+.repo:hover{border-color:var(--accent);transform:translateY(-2px)}
+.repo b{font-weight:600;font-size:15px;overflow-wrap:anywhere}
+.repo p{font-size:13.5px;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.repo .row{margin-top:auto;display:flex;gap:14px;font-size:12.5px;color:var(--ink-3);font-family:"Geist Mono",monospace}
+.repo .row span{display:inline-flex;align-items:center;gap:4px}
+.skel{height:112px;border-radius:var(--r);background:linear-gradient(90deg,var(--surface-2) 0%,var(--bg) 50%,var(--surface-2) 100%);background-size:200% 100%;animation:shimmer 1.4s infinite linear}
+@keyframes shimmer{to{background-position:-200% 0}}
+.notice{margin-top:20px;padding:14px 16px;border-radius:var(--r);background:var(--surface-2);color:var(--ink-2);font-size:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.notice button{height:36px}
+.empty{grid-column:1/-1;padding:40px 16px;text-align:center;color:var(--ink-3)}
+.more{margin-top:20px}
+
+/* ---------- TOOLKIT (grouped clusters) ---------- */
+.toolkit{padding:96px 0}
+.clusters{margin-top:40px;display:grid;gap:32px 40px;grid-template-columns:1fr}
+@media (min-width:768px){.clusters{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1080px){.clusters{grid-template-columns:repeat(3,1fr)}}
+.cluster h3{display:flex;align-items:center;gap:10px;font-size:1rem;font-weight:600;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.cluster h3 .ic{color:var(--accent);width:20px;height:20px}
+.cluster ul{list-style:none;margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.cluster li{font-size:14px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);transition:border-color .2s,background .2s}
+.cluster li:hover{border-color:var(--accent);background:var(--accent-soft)}
+
+/* ---------- EXPERIENCE (timeline rail) ---------- */
+.exp{padding:96px 0;border-top:1px solid var(--line)}
+.exp .wrap{display:grid;gap:40px}
+@media (min-width:1024px){.exp .wrap{grid-template-columns:4fr 8fr;gap:64px}.exp .side{position:sticky;top:104px;align-self:start}}
+.timeline{position:relative;list-style:none;padding-left:28px}
+.timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.timeline .prog{position:absolute;left:5px;top:6px;width:1px;background:var(--accent);height:0;transform-origin:top}
+.job{position:relative;padding-bottom:44px}
+.job:last-child{padding-bottom:0}
+.job::before{content:"";position:absolute;left:-28px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.job .when{font-size:13px;color:var(--ink-3)}
+.job h3{margin-top:4px;font-size:1.2rem;font-weight:600;letter-spacing:-.015em}
+.job .org{color:var(--ink-2);font-size:15px}
+.job ul{margin-top:12px;list-style:none;display:grid;gap:8px}
+.job li{position:relative;padding-left:18px;color:var(--ink-2);font-size:15px;max-width:62ch}
+.job li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+/* ---------- PUBLICATIONS (reference list) ---------- */
+.pubs{padding:96px 0;background:var(--surface);border-block:1px solid var(--line)}
+.refs{margin-top:40px;list-style:none;counter-reset:ref;display:grid;gap:4px}
+.ref{counter-increment:ref;display:grid;grid-template-columns:44px 1fr;gap:12px;padding:20px 0;border-top:1px solid var(--line)}
+.ref::before{content:"[" counter(ref) "]";font:500 14px "Geist Mono",monospace;color:var(--accent);padding-top:2px}
+.ref h3{font-size:1.05rem;font-weight:600;line-height:1.4;letter-spacing:-.01em;max-width:70ch}
+.ref p{margin-top:6px;font-size:14.5px;color:var(--ink-2)}
+.ref a{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:14px;color:var(--accent);text-decoration:none}
+.ref a:hover{text-decoration:underline}
+.pending{display:inline-block;margin-top:8px;font-size:12.5px;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+
+/* ---------- EDUCATION + TRAINING (two columns) ---------- */
+.edu{padding:96px 0}
+.edu .grid{margin-top:40px;display:grid;gap:48px}
+@media (min-width:900px){.edu .grid{grid-template-columns:1fr 1fr;gap:64px}}
+.degree{padding:24px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+.degree + .degree{margin-top:16px}
+.degree .top{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--ink-3)}
+.degree h3{margin-top:8px;font-size:1.15rem;font-weight:600}
+.degree .school{color:var(--ink-2);font-size:15px}
+.degree .thesis{margin-top:14px;font-size:14.5px;color:var(--ink-2)}
+.degree .thesis b{color:var(--ink);font-weight:500}
+.train h3{font-size:1rem;font-weight:600;margin-bottom:8px}
+.train ol{list-style:none}
+.train li{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line);font-size:14.5px}
+.train li:first-child{border-top:0}
+.train li span{font-family:"Geist Mono",monospace;color:var(--ink-3);font-size:13px;padding-top:2px}
+.train li small{display:block;color:var(--ink-3);font-size:13px;margin-top:2px}
+
+/* ---------- CONTACT ---------- */
+.contact{padding:112px 0 56px;border-top:1px solid var(--line)}
+.contact h2{font-size:clamp(2.2rem,5.5vw,4.2rem);letter-spacing:-.045em;max-width:16ch}
+.contact .ctas{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
+#mail-text{user-select:all;overflow-wrap:anywhere;white-space:normal}
+.links{margin-top:72px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;padding-top:24px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-3)}
+.links nav{display:flex;flex-wrap:wrap;gap:20px}
+.links a{text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.links a:hover{color:var(--ink)}
+
+/* ---------- REVEAL ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .hero .rv{animation:rise .8s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i,0) * 80ms)}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}}
+  .job::before{transition:background .4s}
+  .job.lit::before{background:var(--accent)}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.skel{animation:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-github-logo" viewBox="0 0 256 256"><path d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"/></symbol><symbol id="i-circle-half" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,16.37a86.4,86.4,0,0,1,16,3V212.67a86.4,86.4,0,0,1-16,3Zm32,9.26a87.81,87.81,0,0,1,16,10.54V195.83a87.81,87.81,0,0,1-16,10.54ZM40,128a88.11,88.11,0,0,1,80-87.63V215.63A88.11,88.11,0,0,1,40,128Zm160,50.54V77.46a87.82,87.82,0,0,1,0,101.08Z"/></symbol><symbol id="i-sun" viewBox="0 0 256 256"><path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"/></symbol><symbol id="i-moon" viewBox="0 0 256 256"><path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"/></symbol><symbol id="i-flask" viewBox="0 0 256 256"><path d="M221.69,199.77,160,96.92V40h8a8,8,0,0,0,0-16H88a8,8,0,0,0,0,16h8V96.92L34.31,199.77A16,16,0,0,0,48,224H208a16,16,0,0,0,13.72-24.23ZM110.86,103.25A7.93,7.93,0,0,0,112,99.14V40h32V99.14a7.93,7.93,0,0,0,1.14,4.11L183.36,167c-12,2.37-29.07,1.37-51.75-10.11-15.91-8.05-31.05-12.32-45.22-12.81ZM48,208l28.54-47.58c14.25-1.74,30.31,1.85,47.82,10.72,19,9.61,35,12.88,48,12.88a69.89,69.89,0,0,0,19.55-2.7L208,208Z"/></symbol><symbol id="i-envelope-simple" viewBox="0 0 256 256"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></symbol><symbol id="i-arrow-up-right" viewBox="0 0 256 256"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></symbol><symbol id="i-magnifying-glass" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></symbol><symbol id="i-arrow-clockwise" viewBox="0 0 256 256"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></symbol><symbol id="i-code" viewBox="0 0 256 256"><path d="M69.12,94.15,28.5,128l40.62,33.85a8,8,0,1,1-10.24,12.29l-48-40a8,8,0,0,1,0-12.29l48-40a8,8,0,0,1,10.24,12.3Zm176,27.7-48-40a8,8,0,1,0-10.24,12.3L227.5,128l-40.62,33.85a8,8,0,1,0,10.24,12.29l48-40a8,8,0,0,0,0-12.29ZM162.73,32.48a8,8,0,0,0-10.25,4.79l-64,176a8,8,0,0,0,4.79,10.26A8.14,8.14,0,0,0,96,224a8,8,0,0,0,7.52-5.27l64-176A8,8,0,0,0,162.73,32.48Z"/></symbol><symbol id="i-star" viewBox="0 0 256 256"><path d="M239.18,97.26A16.38,16.38,0,0,0,224.92,86l-59-4.76L143.14,26.15a16.36,16.36,0,0,0-30.27,0L90.11,81.23,31.08,86a16.46,16.46,0,0,0-9.37,28.86l45,38.83L53,211.75a16.38,16.38,0,0,0,24.5,17.82L128,198.49l50.53,31.08A16.4,16.4,0,0,0,203,211.75l-13.76-58.07,45-38.83A16.43,16.43,0,0,0,239.18,97.26Zm-15.34,5.47-48.7,42a8,8,0,0,0-2.56,7.91l14.88,62.8a.37.37,0,0,1-.17.48c-.18.14-.23.11-.38,0l-54.72-33.65a8,8,0,0,0-8.38,0L69.09,215.94c-.15.09-.19.12-.38,0a.37.37,0,0,1-.17-.48l14.88-62.8a8,8,0,0,0-2.56-7.91l-48.7-42c-.12-.1-.23-.19-.13-.5s.18-.27.33-.29l63.92-5.16A8,8,0,0,0,103,91.86l24.62-59.61c.08-.17.11-.25.35-.25s.27.08.35.25L153,91.86a8,8,0,0,0,6.75,4.92l63.92,5.16c.15,0,.24,0,.33.29S224,102.63,223.84,102.73Z"/></symbol><symbol id="i-clock" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></symbol><symbol id="i-linkedin-logo" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/></symbol><symbol id="i-identification-badge" viewBox="0 0 256 256"><path d="M75.19,198.4a8,8,0,0,0,11.21-1.6,52,52,0,0,1,83.2,0,8,8,0,1,0,12.8-9.6A67.88,67.88,0,0,0,155,165.51a40,40,0,1,0-53.94,0A67.88,67.88,0,0,0,73.6,187.2,8,8,0,0,0,75.19,198.4ZM128,112a24,24,0,1,1-24,24A24,24,0,0,1,128,112Zm72-88H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V40A16,16,0,0,0,200,24Zm0,192H56V40H200ZM88,64a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H96A8,8,0,0,1,88,64Z"/></symbol><symbol id="i-dna" viewBox="0 0 256 256"><path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"/></symbol><symbol id="i-git-diff" viewBox="0 0 256 256"><path d="M112,152a8,8,0,0,0-8,8v28.69L66.34,151A8,8,0,0,1,64,145.37V95a32,32,0,1,0-16,0v50.38a23.85,23.85,0,0,0,7,17L92.69,200H64a8,8,0,0,0,0,16h48a8,8,0,0,0,8-8V160A8,8,0,0,0,112,152ZM40,64A16,16,0,1,1,56,80,16,16,0,0,1,40,64Zm168,97V110.63a23.85,23.85,0,0,0-7-17L163.31,56H192a8,8,0,0,0,0-16H144a8,8,0,0,0-8,8V96a8,8,0,0,0,16,0V67.31L189.66,105a8,8,0,0,1,2.34,5.66V161a32,32,0,1,0,16,0Zm-8,47a16,16,0,1,1,16-16A16,16,0,0,1,200,208Z"/></symbol><symbol id="i-chart-scatter" viewBox="0 0 256 256"><path d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V48a8,8,0,0,1,16,0V200H224A8,8,0,0,1,232,208ZM132,160a12,12,0,1,0-12-12A12,12,0,0,0,132,160Zm-24-56A12,12,0,1,0,96,92,12,12,0,0,0,108,104ZM76,176a12,12,0,1,0-12-12A12,12,0,0,0,76,176Zm96-48a12,12,0,1,0-12-12A12,12,0,0,0,172,128Zm24-40a12,12,0,1,0-12-12A12,12,0,0,0,196,88Zm-20,76a12,12,0,1,0,12-12A12,12,0,0,0,176,164Z"/></symbol><symbol id="i-flow-arrow" viewBox="0 0 256 256"><path d="M245.66,74.34l-32-32a8,8,0,0,0-11.32,11.32L220.69,72H208c-49.33,0-61.05,28.12-71.38,52.92-9.38,22.51-16.92,40.59-49.48,42.84a40,40,0,1,0,.1,16c43.26-2.65,54.34-29.15,64.14-52.69C161.41,107,169.33,88,208,88h12.69l-18.35,18.34a8,8,0,0,0,11.32,11.32l32-32A8,8,0,0,0,245.66,74.34ZM48,200a24,24,0,1,1,24-24A24,24,0,0,1,48,200Z"/></symbol><symbol id="i-graph" viewBox="0 0 256 256"><path d="M200,152a31.84,31.84,0,0,0-19.53,6.68l-23.11-18A31.65,31.65,0,0,0,160,128c0-.74,0-1.48-.08-2.21l13.23-4.41A32,32,0,1,0,168,104c0,.74,0,1.48.08,2.21l-13.23,4.41A32,32,0,0,0,128,96a32.59,32.59,0,0,0-5.27.44L115.89,81A32,32,0,1,0,96,88a32.59,32.59,0,0,0,5.27-.44l6.84,15.4a31.92,31.92,0,0,0-8.57,39.64L73.83,165.44a32.06,32.06,0,1,0,10.63,12l25.71-22.84a31.91,31.91,0,0,0,37.36-1.24l23.11,18A31.65,31.65,0,0,0,168,184a32,32,0,1,0,32-32Zm0-64a16,16,0,1,1-16,16A16,16,0,0,1,200,88ZM80,56A16,16,0,1,1,96,72,16,16,0,0,1,80,56ZM56,208a16,16,0,1,1,16-16A16,16,0,0,1,56,208Zm56-80a16,16,0,1,1,16,16A16,16,0,0,1,112,128Zm88,72a16,16,0,1,1,16-16A16,16,0,0,1,200,200Z"/></symbol><symbol id="i-copy" viewBox="0 0 256 256"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"/></symbol><symbol id="i-check" viewBox="0 0 256 256"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></symbol></svg>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" data-bind="name">Salma Hafeez</a>
+    <ul id="navlinks">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#toolkit">Toolkit</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <div class="nav-r">
+      <a class="icon-btn" id="gh-nav" aria-label="GitHub profile" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-github-logo"/></svg></a>
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch colour theme"><svg class="ic" aria-hidden="true"><use href="#i-circle-half"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <div class="role mono rv"><b style="font-weight:500" data-bind="role"></b></div>
+        <h1 class="rv" style="--i:1" id="hero-h"></h1>
+        <p class="rv" style="--i:2" data-bind="tagline"></p>
+        <div class="ctas rv" style="--i:3">
+          <a class="btn btn-primary" href="#work"><svg class="ic" aria-hidden="true"><use href="#i-flask"/></svg>View work</a>
+          <a class="btn btn-ghost" href="#contact"><svg class="ic" aria-hidden="true"><use href="#i-envelope-simple"/></svg>Get in touch</a>
+        </div>
+      </div>
+      <figure class="atlas rv" style="--i:2" aria-label="Interactive embedding: each cluster is a skill area. Hover or tap a cluster to see its tools.">
+        <canvas id="umap"></canvas>
+        <div class="atlas-tip" id="tip" role="status"></div>
+        <figcaption class="atlas-cap mono"><span>UMAP_1</span><span id="cap-hint">hover a cluster</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" aria-label="About">
+    <div class="wrap">
+      <p class="statement rv" id="statement"></p>
+      <div class="figs" id="figs"></div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="work" id="work">
+    <div class="wrap">
+      <div class="role mono rv">Selected work</div>
+      <h2 class="rv">Pipelines and analyses, open on GitHub.</h2>
+      <div class="bento" id="bento"></div>
+
+      <div class="index-head">
+        <h3>Every repository</h3>
+        <span class="status mono" id="repo-status" aria-live="polite">Loading from GitHub…</span>
+      </div>
+      <div class="controls">
+        <div class="field search-wrap">
+          <label for="q">Search repositories</label>
+          <input class="search" id="q" type="search" name="q" placeholder="RNA, SVM, cancer…" autocomplete="off" spellcheck="false">
+          <svg class="ic" aria-hidden="true"><use href="#i-magnifying-glass"/></svg>
+        </div>
+        <div class="field" style="min-width:0;flex:1">
+          <span style="font-size:12.5px;color:var(--ink-2)" id="lang-label">Filter by language</span>
+          <div class="chips" id="langs" role="group" aria-labelledby="lang-label"></div>
+        </div>
+      </div>
+      <div id="notice"></div>
+      <div class="repos" id="repos"></div>
+      <div class="more" id="more"></div>
+    </div>
+  </section>
+
+  <!-- TOOLKIT -->
+  <section class="toolkit" id="toolkit">
+    <div class="wrap">
+      <h2 class="rv">Toolkit</h2>
+      <p class="lede rv" style="margin-top:14px">Grouped the way the work actually runs: from raw reads to a model someone can reproduce.</p>
+      <div class="clusters" id="clusters"></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="exp" id="experience">
+    <div class="wrap">
+      <div class="side">
+        <h2 class="rv">Experience</h2>
+        <p class="lede rv" style="margin-top:14px">Research roles across NUST, COMSATS and industry, building and running genomics workflows.</p>
+      </div>
+      <ol class="timeline" id="timeline"><li class="prog" id="prog" aria-hidden="true"></li></ol>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section class="pubs" id="publications">
+    <div class="wrap">
+      <div class="role mono rv">References</div>
+      <h2 class="rv">Publications</h2>
+      <ol class="refs" id="refs"></ol>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="edu" id="education">
+    <div class="wrap">
+      <h2 class="rv">Education and training</h2>
+      <div class="grid">
+        <div id="degrees"></div>
+        <div class="train rv"><h3>Workshops</h3><ol id="workshops"></ol></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2 class="rv">Working on single-cell or cancer genomics data?</h2>
+      <p class="lede rv" style="margin-top:16px">Open to research positions, PhD projects and collaborations.</p>
+      <div class="ctas rv">
+        <a class="btn btn-primary" id="mail-foot"><svg class="ic" aria-hidden="true"><use href="#i-envelope-simple"/></svg><span id="mail-text"></span></a>
+        <button class="btn btn-ghost" type="button" id="copy"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy email</span></button>
+        <a class="btn btn-ghost" id="li-foot" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-linkedin-logo"/></svg>LinkedIn</a>
+      </div>
+      <div class="links">
+        <span>&copy; <span id="yr"></span> <span data-bind="name"></span>, <span data-bind="location"></span></span>
+        <nav aria-label="Profiles" id="profiles"></nav>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+/* ==================================================================
+   CONTENT  -  edit this object to reuse the template for anyone.
+   Everything on the page is rendered from it.
+   ================================================================== */
+const SITE = {
+  name: "Salma Hafeez",
+  heroName: ["Salma", "Hafeez"],
+  role: "Bioinformatician",
+  tagline: "I build reproducible single-cell and bulk RNA-seq pipelines, and turn the results into biology.",
+  location: "Haripur, Pakistan",
+  github: "Bioinformatician-dev",
+  email: "salmahafeez575@gmail.com",
+  linkedin: "https://www.linkedin.com/in/salma-hafeez/",
+  orcid: "0000-0002-9983-4683",
+  statement: ["MS-trained bioinformatician working where sequencing data meets disease.", "Clustering, differential expression, cell-type annotation and multi-modal integration, written so the next person can rerun it."],
+  figures: [
+    ["3+", "years building end-to-end omics pipelines"],
+    ["10k+", "cells and samples processed per dataset"],
+    ["2", "peer-reviewed papers, one more under review"],
+    ["6", "specialist workshops, including two at MDC-BIMSB Berlin"]
+  ],
+  // Featured projects (bento). `plot` picks the generated figure drawn on each tile.
+  featured: [
+    {repo:"single-Cell-RNA-Sequencing", title:"Single-cell RNA-seq pipeline", text:"QC, normalisation, clustering, marker genes and visualisation, end to end.", tags:["scRNA-seq","Seurat","R"], plot:"umap"},
+    {repo:"Cancer-Genomics", title:"Cancer genomics in R", text:"Computational analysis of cancer datasets with Bioconductor workflows.", tags:["Bioconductor","TCGA"], plot:"oncoprint"},
+    {repo:"Data-Integration", title:"Multi-omics integration", text:"ML-ready integrated datasets with downstream predictive analysis.", tags:["multi-omics","Python"], plot:"heatmap"},
+    {repo:"Alzheimer-s-Disease-Classification-", title:"Alzheimer's disease classification", text:"Preprocessing and evaluation across several supervised classifiers.", tags:["scikit-learn","SVM","RF"], plot:"roc"}
+  ],
+  // Used when GitHub cannot be reached (offline, rate limit, or a sandbox that blocks requests).
+  snapshotDate: "2026-10-03",
+  snapshot: [{"name": "lentilseed_vision", "description": null, "language": "Python", "stars": 0, "pushed": "2026-09-04T13:30:27Z"}, {"name": "antimicrobial-resistance", "description": null, "language": "Python", "stars": 0, "pushed": "2026-09-01T18:50:08Z"}, {"name": "variant-classification", "description": "variant-classification → Machine learning and bioinformatics approaches for genetic variant classification.", "language": "Jupyter Notebook", "stars": 1, "pushed": "2026-09-01T18:42:01Z"}, {"name": "Bioinformatician-dev", "description": "Config files for my GitHub profile.", "language": null, "stars": 0, "pushed": "2026-08-15T06:42:44Z"}, {"name": "RNA-Seq-analysis", "description": null, "language": "Jupyter Notebook", "stars": 0, "pushed": "2026-08-15T06:10:24Z"}, {"name": "metagenomics", "description": null, "language": "Python", "stars": 0, "pushed": "2026-08-10T11:14:33Z"}, {"name": "microbiome-16s-pipeline", "description": null, "language": "HTML", "stars": 0, "pushed": "2026-08-10T11:12:55Z"}, {"name": "fluorescence-image-analysis", "description": null, "language": "Python", "stars": 0, "pushed": "2026-07-30T07:47:18Z"}, {"name": "RNA-SeqAnalysis", "description": null, "language": "JavaScript", "stars": 0, "pushed": "2026-07-29T10:30:11Z"}, {"name": "bioml-drug-target-prediction", "description": null, "language": "Python", "stars": 0, "pushed": "2026-07-29T05:00:37Z"}, {"name": "NGS-Genomics-Analysis-Pipeline", "description": null, "language": "Jupyter Notebook", "stars": 0, "pushed": "2026-04-21T04:42:06Z"}, {"name": "Alzheimer-s-Disease-Classification-", "description": null, "language": "Jupyter Notebook", "stars": 0, "pushed": "2025-04-02T12:00:24Z"}, {"name": "Parkinson-s-Disease-Classification-using-SVM", "description": null, "language": "Jupyter Notebook", "stars": 0, "pushed": "2025-02-28T13:15:00Z"}, {"name": "naive-bayes-iris-classifier", "description": null, "language": "Jupyter Notebook", "stars": 0, "pushed": "2024-10-31T18:34:54Z"}, {"name": "YOLOv9-for-object-detection-and-counting-", "description": "YOLOv9-for-object-detection-and-counting- → YOLOv9-based object detection and counting using computer vision.", "language": "Python", "stars": 0, "pushed": "2024-10-27T13:20:09Z"}, {"name": "DNA-Sequence-Classification-Using-Deep-Learning", "description": "DNA-Sequence-Classification-Using-Deep-Learning → Deep learning models for DNA sequence classification using Python.", "language": "Python", "stars": 0, "pushed": "2024-10-27T13:08:51Z"}, {"name": "Needleman-Wunsch-and-Smith-Waterman-Algorithm-using-Python", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-26T11:14:35Z"}, {"name": "Sequence-Translator-Using-Python", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-26T11:13:41Z"}, {"name": "Counting-Features-in-Multiple-GenBank-Files-Using-Python", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-26T11:12:05Z"}, {"name": "File-Handling-of-5-UTR-of-Homo-sapiens-Using-Python", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-26T11:10:46Z"}, {"name": "GC-content-using-python", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-26T10:50:32Z"}, {"name": "Find-Purines-and-Pyrimidines-using-python", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-26T10:46:45Z"}, {"name": "Prediction-Tool", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-26T09:38:49Z"}, {"name": "GNN-image-classification", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-25T13:56:37Z"}, {"name": "Graph-Neural-Networks-for-object-detection", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-25T13:47:41Z"}, {"name": "Biomedical-images-analysis-CNN", "description": "Biomedical-images-analysis-CNN → CNN-based analysis and classification of biomedical images.", "language": "Python", "stars": 0, "pushed": "2024-10-25T13:31:02Z"}, {"name": "Automatically-counting-and-analyzing-cells-in-microscopy-images", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-25T13:06:58Z"}, {"name": "Integrating-multi-omics-data-in-MATLAB", "description": null, "language": null, "stars": 0, "pushed": "2024-10-25T12:53:16Z"}, {"name": "classifying-the-Iris-dataset-using-CNNs", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-25T12:29:25Z"}, {"name": "Variant-Effect-Predictor", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-25T11:44:52Z"}, {"name": "Bioinformatics-Pipeline-Simulator", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-25T11:26:57Z"}, {"name": "DNA-sequence-veiwer", "description": null, "language": "JavaScript", "stars": 0, "pushed": "2024-10-24T12:01:46Z"}, {"name": "Protein-Structure-Prediction", "description": null, "language": "R", "stars": 0, "pushed": "2024-10-24T11:50:50Z"}, {"name": "Gene-Expression-Analysis", "description": null, "language": "R", "stars": 0, "pushed": "2024-10-24T11:34:18Z"}, {"name": "pathway-enrichment-analysis-", "description": "Pathway Analysis Based on Gene Lists from Differential Expression Analysis", "language": "R", "stars": 0, "pushed": "2024-10-24T11:27:37Z"}, {"name": "Network-Analysis", "description": null, "language": "R", "stars": 0, "pushed": "2024-10-24T11:19:55Z"}, {"name": "single-Cell-RNA-Sequencing", "description": "Analyzing Single-Cell RNA Sequencing Data with Seurat", "language": "R", "stars": 0, "pushed": "2024-10-24T11:15:54Z"}, {"name": "Cancer-Genomics", "description": "cancer genomics analysis in R", "language": "R", "stars": 0, "pushed": "2024-10-24T08:16:29Z"}, {"name": "Data-Integration", "description": null, "language": "R", "stars": 0, "pushed": "2024-10-24T08:11:26Z"}, {"name": "Genome-annotation-pipeline", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-24T08:01:54Z"}, {"name": "DNA-Sequence-Analysis-Tool", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-24T07:56:16Z"}, {"name": "Phylogenetic-Tree-Construction", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-24T07:34:14Z"}, {"name": "Variant-Calling-from-Sequencing-Data", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-24T07:27:42Z"}, {"name": "Extracting_primary_structure_from_PDB_file", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-23T16:28:35Z"}, {"name": "scientific-calculator-by-python", "description": null, "language": "Python", "stars": 0, "pushed": "2024-10-21T18:32:39Z"}],
+  // Skill clusters. Also drive the hero embedding: one cluster per group.
+  toolkit: [
+    {name:"Single-cell & transcriptomics", short:"Single-cell", icon:"ph-dna", items:["scRNA-seq","ATAC-seq","Bulk RNA-seq","Differential expression","Clustering","Cell-type annotation","Marker genes","QC & filtering"]},
+    {name:"Genomics & variants", short:"Genomics", icon:"ph-git-diff", items:["BWA","SAMtools","GATK","ANNOVAR","Ensembl VEP","Variant interpretation"]},
+    {name:"Machine learning & stats", short:"ML & stats", icon:"ph-chart-scatter", items:["scikit-learn","TensorFlow","Feature selection","Regression","Supervised ML","Statistical testing"]},
+    {name:"Workflows & reproducibility", short:"Workflows", icon:"ph-flow-arrow", items:["Snakemake","Nextflow","Docker","Git / GitHub","Linux & HPC","R Markdown"]},
+    {name:"Systems biology", short:"Networks", icon:"ph-graph", items:["Pathway enrichment","Gene ontology","Network analysis","Protein modelling","Docking"]},
+    {name:"Languages, data & viz", short:"Code & data", icon:"ph-code", items:["Python","R","Bash","Perl","Bioconductor","ggplot2","Matplotlib","Seaborn","TCGA","GEO","Ensembl","UniProt","PDB"]}
+  ],
+  experience: [
+    {when:"Feb 2024 - Sep 2025", title:"Graduate Research Assistant", org:"National University of Sciences and Technology, Islamabad", points:["Built end-to-end RNA-seq and omics pipelines in Python, R and Linux.","Processed and analysed transcriptomic datasets of 10k+ samples and cells.","Applied machine-learning models to classify biological patterns and disease states.","Improved pipeline efficiency and reproducibility with workflow managers."]},
+    {when:"Feb 2022 - Jan 2024", title:"Research Scholar", org:"COMSATS University, Islamabad", points:["Ran gene ontology, pathway enrichment and biological network analyses.","Supported multi-omics integration and ML analyses for translational projects.","Curated data, documented analyses and validated results for reproducibility.","Contributed to scientific writing and project coordination."]},
+    {when:"May 2021 - Aug 2021", title:"Bioinformatician", org:"Biocode Ltd., Islamabad", points:["Performed functional genomics analyses in Python, R and Linux.","Extracted disease signatures from microarray datasets.","Worked with NGS tools and variant-aware workflows.","Ran structural workflows including protein modelling and docking."]}
+  ],
+  publications: [
+    {title:"Genetic-driven biomarkers for liver carcinoma through a bioinformatics approach", venue:"Manuscript under review", pending:true},
+    {title:"Molecular modeling studies to mimic the binding hypothesis of NEU3 sialidase and EGFR in non-small cell lung carcinoma", venue:"Khalid A., Hafeez S., Jabeen I. Journal of Computational Biophysics and Chemistry, 2024, 1-20.", doi:"10.1142/S2737416524500406"},
+    {title:"Pathway network analysis of genes involved in dominant syndromes", venue:"Hafeez S., Aslam T., Hasnain M. J. U. IRJMETS 2(8), 2020."}
+  ],
+  education: [
+    {degree:"MS Bioinformatics", school:"COMSATS University, Islamabad", year:"2024", grade:"CGPA 3.41 / 4.00", thesis:"Deep learning-based tool for detecting qualitative and quantitative parameters of lentil seeds"},
+    {degree:"MSc Zoology", school:"Virtual University of Pakistan, Rawalpindi", year:"2020", grade:"CGPA 3.78 / 4.00", thesis:"Pathway network analysis of genes involved in multiple dominant syndromes"}
+  ],
+  workshops: [
+    ["2025","Multi-omics data integration using deep learning for precision oncology","MDC-BIMSB, Germany"],
+    ["2025","Spatial omics analysis for multi-resolution and multi-omics integration","MDC-BIMSB, Germany"],
+    ["2021","Hands-on NGS cancer genomics workshop","Biocode Ltd., Islamabad"],
+    ["2021","Genes to Pathways, second edition","Decode Life"],
+    ["2021","Cloud-based rational computational drug design","NUST, Islamabad"],
+    ["2019","Latest bioinformatics tools and technologies in genomics","Virtual University of Pakistan"]
+  ]
+};
+
+/* ================================================================== */
+const $ = s => document.querySelector(s);
+const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const ghURL = r => `https://github.com/${SITE.github}${r ? "/" + r : ""}`;
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+/* ---------- static content ---------- */
+document.querySelectorAll('[data-bind]').forEach(n => n.textContent = SITE[n.dataset.bind]);
+$("#hero-h").innerHTML = `${esc(SITE.heroName[0])}<br><em>${esc(SITE.heroName[1])}</em>`;
+$("#statement").innerHTML = `${esc(SITE.statement[0])} <span>${esc(SITE.statement[1])}</span>`;
+$("#figs").innerHTML = SITE.figures.map((f,i) => `<div class="fig rv" style="--i:${i}"><b>${esc(f[0])}</b><span>${esc(f[1])}</span></div>`).join("");
+$("#mail-foot").href = `mailto:${SITE.email}`; $("#mail-text").textContent = SITE.email;
+$("#copy").addEventListener("click", async () => {
+  const b = $("#copy"), lab = b.querySelector("span"), ic = b.querySelector("use");
+  try { await navigator.clipboard.writeText(SITE.email); lab.textContent = "Copied"; ic.setAttribute("href","#i-check"); }
+  catch(e){ const r = document.createRange(); r.selectNodeContents($("#mail-text")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); lab.textContent = "Selected, press Ctrl+C"; }
+  setTimeout(() => { lab.textContent = "Copy email"; ic.setAttribute("href","#i-copy"); }, 2200);
+});
+$("#li-foot").href = SITE.linkedin; $("#gh-nav").href = ghURL();
+$("#yr").textContent = new Date().getFullYear();
+$("#profiles").innerHTML = [
+  [ghURL(), "ph-github-logo", "GitHub"], [SITE.linkedin, "ph-linkedin-logo", "LinkedIn"],
+  [`https://orcid.org/${SITE.orcid}`, "ph-identification-badge", "ORCID"], [`mailto:${SITE.email}`, "ph-envelope-simple", SITE.email]
+].map(([h,i,t]) => `<a href="${esc(h)}" ${h.startsWith("http") ? 'target="_blank" rel="noopener"' : ""}><svg class="ic" aria-hidden="true"><use href="#i-${i.replace("ph-","")}"/></svg>${esc(t)}</a>`).join("");
+
+$("#clusters").innerHTML = SITE.toolkit.map((g,i) => `<div class="cluster rv" style="--i:${i%3}"><h3><svg class="ic" aria-hidden="true"><use href="#i-${g.icon.replace("ph-","")}"/></svg>${esc(g.name)}</h3><ul>${g.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+$("#timeline").insertAdjacentHTML("beforeend", SITE.experience.map(j => `<li class="job rv"><div class="when mono">${esc(j.when)}</div><h3>${esc(j.title)}</h3><div class="org">${esc(j.org)}</div><ul>${j.points.map(p=>`<li>${esc(p)}</li>`).join("")}</ul></li>`).join(""));
+$("#refs").innerHTML = SITE.publications.map(p => `<li class="ref rv"><div><h3>${esc(p.title)}</h3><p>${esc(p.venue)}</p>${p.doi ? `<a href="https://doi.org/${esc(p.doi)}" target="_blank" rel="noopener">doi.org/${esc(p.doi)}<svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>` : ""}${p.pending ? `<span class="pending">Under review</span>` : ""}</div></li>`).join("");
+$("#degrees").innerHTML = SITE.education.map(d => `<article class="degree rv"><div class="top mono"><span>${esc(d.year)}</span><span>${esc(d.grade)}</span></div><h3>${esc(d.degree)}</h3><div class="school">${esc(d.school)}</div><p class="thesis"><b>Thesis.</b> ${esc(d.thesis)}</p></article>`).join("");
+$("#workshops").innerHTML = SITE.workshops.map(w => `<li><span>${esc(w[0])}</span><div>${esc(w[1])}<small>${esc(w[2])}</small></div></li>`).join("");
+$("#bento").innerHTML = SITE.featured.map((f,i) => `<a class="tile c${i+1} rv" style="--i:${i}" href="${ghURL(f.repo)}" target="_blank" rel="noopener"><canvas data-plot="${f.plot}" aria-hidden="true"></canvas><div class="meta"><h3>${esc(f.title)}<svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></h3><p>${esc(f.text)}</p><div class="tags">${f.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div></div></a>`).join("");
+
+/* ---------- theme ---------- */
+const root = document.documentElement;
+const order = ["auto","light","dark"];
+let themeIdx = 0;
+try { const t = localStorage.getItem("theme"); if (order.includes(t)) themeIdx = order.indexOf(t); } catch(e){}
+function applyTheme(){
+  const t = order[themeIdx];
+  if (t === "auto") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", t);
+  $("#theme").innerHTML = `<svg class="ic" aria-hidden="true"><use href="#i-${t==="auto"?"circle-half":t==="light"?"sun":"moon"}"/></svg>`;
+  $("#theme").setAttribute("aria-label", `Colour theme: ${t}. Switch theme`);
+  try { localStorage.setItem("theme", t); } catch(e){}
+  requestAnimationFrame(redrawAll);
+}
+$("#theme").addEventListener("click", () => { themeIdx = (themeIdx + 1) % 3; applyTheme(); });
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => redrawAll());
+
+/* ---------- seeded RNG ---------- */
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function gauss(r){ let u=0,v=0; while(!u) u=r(); while(!v) v=r(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+function fit(cv){ const dpr = Math.min(devicePixelRatio||1, 2); const b = cv.getBoundingClientRect(); cv.width = Math.max(1, b.width*dpr); cv.height = Math.max(1, b.height*dpr); const c = cv.getContext("2d"); c.setTransform(dpr,0,0,dpr,0,0); return [c, b.width, b.height]; }
+
+/* ==================================================================
+   HERO EMBEDDING: one cluster per toolkit group. Points start as a
+   random cloud and settle into clusters (the "clustering" step).
+   ================================================================== */
+const HINT = matchMedia("(pointer: coarse)").matches ? "tap a cluster" : "hover a cluster";
+const U = { cv: $("#umap"), pts: [], centers: [], hover: -1, t: reduce ? 1 : 0, start: 0 };
+(function buildEmbedding(){
+  const r = rng(7);
+  const layout = [[.27,.32],[.70,.24],[.80,.63],[.47,.78],[.20,.70],[.50,.46]];
+  U.centers = SITE.toolkit.map((g,i) => ({ x: layout[i%6][0], y: layout[i%6][1], name: g.name, short: g.short || g.name, items: g.items, sx: .045 + r()*.03, sy: .04 + r()*.03, rot: r()*Math.PI }));
+  U.centers.forEach((c,ci) => {
+    const n = 150 + Math.round(r()*80);
+    for (let k=0;k<n;k++){
+      const a = gauss(r)*c.sx, b = gauss(r)*c.sy;
+      // slight arc so clusters look like real embeddings, not ellipses
+      const bend = .9*a*a/(c.sx*4);
+      const x = c.x + a*Math.cos(c.rot) - (b+bend)*Math.sin(c.rot);
+      const y = c.y + a*Math.sin(c.rot) + (b+bend)*Math.cos(c.rot);
+      U.pts.push({ c: ci, x, y, x0: r(), y0: r(), s: .9 + r()*1.4, d: r() });
+    }
+  });
+})();
+function drawUMAP(){
+  const [c,w,h] = fit(U.cv);
+  const pad = 26, accent = css("--accent"), dot = css("--dot"), ink = css("--ink-3");
+  const e = t => 1 - Math.pow(1 - Math.min(1, Math.max(0, t)), 3);
+  c.clearRect(0,0,w,h);
+  for (const p of U.pts){
+    const k = e((U.t - p.d*.35) / .65);
+    const x = pad + (p.x0 + (p.x - p.x0)*k)*(w-2*pad), y = pad + (p.y0 + (p.y - p.y0)*k)*(h-2*pad);
+    const on = U.hover === p.c;
+    c.globalAlpha = U.hover < 0 ? .75 : on ? .95 : .22;
+    c.fillStyle = on ? accent : (U.hover < 0 && p.c === 0 ? accent : dot);
+    c.beginPath(); c.arc(x, y, on ? p.s + .5 : p.s, 0, 7); c.fill();
+  }
+  c.globalAlpha = Math.min(1, Math.max(0, (U.t - .75)/.25));
+  c.font = '500 11.5px "Geist Mono", monospace'; c.textAlign = "center";
+  U.centers.forEach((cc,i) => {
+    const x = pad + cc.x*(w-2*pad), y = pad + cc.y*(h-2*pad) - (cc.sy*(h-2*pad))*2.6;
+    c.lineWidth = 4; c.strokeStyle = css("--surface"); c.lineJoin = "round";
+    c.strokeText(cc.short, x, Math.max(14, y));
+    c.fillStyle = U.hover === i ? accent : ink;
+    c.fillText(cc.short, x, Math.max(14, y));
+  });
+  c.globalAlpha = 1;
+}
+function animateUMAP(ts){
+  if (!U.start) U.start = ts;
+  U.t = Math.min(1, (ts - U.start) / 2200);
+  drawUMAP();
+  if (U.t < 1) requestAnimationFrame(animateUMAP);
+}
+function nearestCluster(mx, my){
+  const b = U.cv.getBoundingClientRect(), pad = 26;
+  const x = (mx - b.left - pad)/(b.width-2*pad), y = (my - b.top - pad)/(b.height-2*pad);
+  let best = -1, bd = .028;
+  for (const p of U.pts){ const d = (p.x-x)**2 + (p.y-y)**2; if (d < bd){ bd = d; best = p.c; } }
+  return best;
+}
+function setHover(i, mx, my){
+  if (U.t < 1) return;
+  const tip = $("#tip");
+  if (i !== U.hover){ U.hover = i; drawUMAP(); }
+  if (i < 0){ tip.classList.remove("on"); $("#cap-hint").textContent = HINT; return; }
+  const cc = U.centers[i], b = U.cv.parentElement.getBoundingClientRect();
+  tip.innerHTML = `<b>${esc(cc.name)}</b>${esc(cc.items.slice(0,5).join(", "))}${cc.items.length>5?"…":""}`;
+  const tx = Math.min(b.width - 246, Math.max(8, mx - b.left + 14)), ty = Math.min(b.height - 90, Math.max(8, my - b.top + 14));
+  tip.style.left = tx + "px"; tip.style.top = ty + "px"; tip.classList.add("on");
+  $("#cap-hint").textContent = `${cc.items.length} tools`;
+}
+U.cv.addEventListener("pointermove", e => setHover(nearestCluster(e.clientX, e.clientY), e.clientX, e.clientY));
+U.cv.addEventListener("pointerleave", () => setHover(-1));
+U.cv.addEventListener("click", e => { const i = nearestCluster(e.clientX, e.clientY); if (e.pointerType === "touch" || HINT.startsWith("tap")){ setHover(i, e.clientX, e.clientY); return; } if (i >= 0) document.querySelectorAll(".cluster")[i]?.scrollIntoView({behavior: reduce ? "auto" : "smooth", block:"center"}); });
+
+/* ==================================================================
+   TILE FIGURES: small generated plots matching each project type.
+   Swap a <canvas> for a real figure <img> any time.
+   ================================================================== */
+function drawTile(cv){
+  const [c,w,h] = fit(cv), r = rng(cv.dataset.plot.length * 97);
+  const accent = css("--accent"), dot = css("--dot"), line = css("--line"), ink3 = css("--ink-3");
+  c.clearRect(0,0,w,h);
+  const P = 22, W = w - 2*P, H = h - 2*P;
+  const kind = cv.dataset.plot;
+  if (kind === "umap"){
+    const cs = [[.25,.35],[.55,.25],[.78,.55],[.4,.7],[.15,.72]];
+    cs.forEach((cc,i) => { for (let k=0;k<120;k++){ c.globalAlpha=.8; c.fillStyle = i===1 ? accent : dot; c.beginPath(); c.arc(P+(cc[0]+gauss(r)*.05)*W, P+(cc[1]+gauss(r)*.06)*H, 1.6, 0, 7); c.fill(); } });
+  } else if (kind === "oncoprint"){
+    const rows = 7, cols = 28, cw = W/cols, rh = H/rows;
+    for (let i=0;i<rows;i++) for (let j=0;j<cols;j++){
+      c.fillStyle = line; c.fillRect(P+j*cw+1, P+i*rh+2, cw-2, rh-4);
+      if (r() < .5 - i*.06){ c.fillStyle = r() < .6 ? accent : ink3; c.fillRect(P+j*cw+1, P+i*rh+rh*.28, cw-2, rh*.44); }
+    }
+  } else if (kind === "heatmap"){
+    const rows = 9, cols = 9, cw = W/cols, rh = H/rows;
+    for (let i=0;i<rows;i++) for (let j=0;j<cols;j++){
+      const v = Math.max(0, Math.min(1, .5 + .45*Math.cos((i-j)*.7) + gauss(r)*.12));
+      c.fillStyle = accent; c.globalAlpha = .12 + v*.85; c.fillRect(P+j*cw+1, P+i*rh+1, cw-2, rh-2);
+    }
+  } else if (kind === "roc"){
+    c.strokeStyle = line; c.lineWidth = 1; c.setLineDash([4,4]);
+    c.beginPath(); c.moveTo(P, P+H); c.lineTo(P+W, P); c.stroke(); c.setLineDash([]);
+    [[.35, dot],[.18, ink3],[.08, accent]].forEach(([k,col]) => {
+      c.strokeStyle = col; c.lineWidth = col === accent ? 2.4 : 1.6; c.beginPath();
+      for (let x=0;x<=1.0001;x+=.02){ const y = Math.pow(x, k); c.lineTo(P + x*W, P + H - y*H); } c.stroke();
+    });
+  }
+  c.globalAlpha = 1;
+}
+function redrawAll(){ drawUMAP(); document.querySelectorAll(".tile canvas").forEach(drawTile); }
+
+/* ==================================================================
+   LIVE REPOSITORIES from the GitHub API (no token, browser side)
+   ================================================================== */
+const R = { all: [], lang: "All", q: "", shown: 12, source: "live" };
+const rtf = (() => { try { return new Intl.RelativeTimeFormat(navigator.languages?.[0] || navigator.language, { numeric: "auto", style: "short" }); } catch(e){ return new Intl.RelativeTimeFormat("en", { numeric: "auto", style: "short" }); } })();
+const timeAgo = d => { const days = Math.round((new Date(d) - Date.now()) / 864e5); if (Math.abs(days) < 30) return rtf.format(days, "day"); if (Math.abs(days) < 365) return rtf.format(Math.round(days/30), "month"); return rtf.format(Math.round(days/365), "year"); };
+function skeleton(){ $("#repos").innerHTML = Array.from({length:6}, () => `<div class="skel" aria-hidden="true"></div>`).join(""); }
+async function getJSON(url, ms = 9000){
+  const ac = new AbortController(), t = setTimeout(() => ac.abort(), ms);
+  try {
+    const res = await fetch(url, { signal: ac.signal, headers: { Accept: "application/vnd.github+json" } });
+    if (res.status === 403 || res.status === 429){ const reset = res.headers.get("x-ratelimit-reset"); const e = new Error("rate"); e.reset = reset ? new Date(reset*1000) : null; throw e; }
+    if (res.status === 404){ throw new Error("404"); }
+    if (!res.ok) throw new Error("http " + res.status);
+    return res.json();
+  } finally { clearTimeout(t); }
+}
+async function loadRepos(){
+  skeleton(); $("#notice").innerHTML = ""; $("#repo-status").textContent = "Loading from GitHub…";
+  try {
+    let page = 1, out = [];
+    while (page <= 5){
+      const batch = await getJSON(`https://api.github.com/users/${SITE.github}/repos?per_page=100&sort=pushed&page=${page}`);
+      out = out.concat(batch); if (batch.length < 100) break; page++;
+    }
+    R.all = out.filter(x => !x.fork).map(x => ({ name:x.name, description:x.description, language:x.language, stars:x.stargazers_count, pushed:x.pushed_at, url:x.html_url }));
+    R.source = "live";
+    $("#repo-status").textContent = `${R.all.length} public repositories, live`;
+  } catch(err){
+    R.all = SITE.snapshot.map(x => ({ ...x, url: ghURL(x.name) })); R.source = "snapshot";
+    const saved = new Date(SITE.snapshotDate + "T12:00:00").toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric"});
+    const why = err.message === "rate" ? `GitHub's hourly limit for anonymous requests was reached${err.reset ? `; it resets at ${(()=>{ try { return err.reset.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}); } catch(e){ return err.reset.toISOString().slice(11,16) + " UTC"; } })()}` : ""}.`
+      : err.message === "404" ? `The GitHub account “${esc(SITE.github)}” was not found. Check <code>github</code> in the SITE config.`
+      : "GitHub could not be reached (offline, blocked or too slow).";
+    $("#notice").innerHTML = `<div class="notice"><span>${why} Showing the list saved on ${saved}.</span><button class="btn btn-ghost" type="button" id="retry"><svg class="ic" aria-hidden="true"><use href="#i-arrow-clockwise"/></svg>Try again</button></div>`;
+    $("#retry").onclick = loadRepos;
+    $("#repo-status").textContent = `${R.all.length} repositories, saved ${saved}`;
+  }
+  buildLangs(); renderRepos();
+}
+function buildLangs(){
+  const counts = {}; R.all.forEach(x => { const l = x.language || "Other"; counts[l] = (counts[l]||0) + 1; });
+  const langs = ["All", ...Object.keys(counts).sort((a,b) => counts[b]-counts[a])];
+  if (!langs.includes(R.lang)) R.lang = "All";
+  $("#langs").innerHTML = langs.map(l => `<button class="chip" type="button" aria-pressed="${l===R.lang}" data-l="${esc(l)}">${esc(l)}${l!=="All"?` <span class="mono" style="opacity:.6">${counts[l]}</span>`:""}</button>`).join("");
+  $("#langs").querySelectorAll(".chip").forEach(b => b.onclick = () => { R.lang = b.dataset.l; R.shown = 12; buildLangs(); renderRepos(); });
+}
+function renderRepos(){
+  const q = R.q.toLowerCase();
+  const list = R.all.filter(x => (R.lang === "All" || (x.language || "Other") === R.lang) && (!q || (x.name + " " + (x.description||"")).toLowerCase().includes(q)));
+  if (!list.length){ $("#repos").innerHTML = `<p class="empty">No repositories match “${esc(R.q)}”. Try a broader term or another language.</p>`; $("#more").innerHTML = ""; return; }
+  $("#repos").innerHTML = list.slice(0, R.shown).map(x => `<a class="repo" href="${esc(x.url)}" target="_blank" rel="noopener"><b translate="no">${esc(x.name.replace(/(\w)-s(?=-|$)/g,"$1’s").replace(/[-_]+/g," ").trim())}</b><p>${esc(x.description || "No description yet.")}</p><div class="row">${x.language?`<span><svg class="ic" aria-hidden="true"><use href="#i-code"/></svg>${esc(x.language)}</span>`:""}${x.stars?`<span><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>${x.stars}</span>`:""}${x.pushed?`<span><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>${timeAgo(x.pushed)}</span>`:""}</div></a>`).join("");
+  $("#more").innerHTML = list.length > R.shown ? `<button class="btn btn-ghost" type="button" id="showmore">Show all ${list.length}</button>` : "";
+  if ($("#showmore")) $("#showmore").onclick = () => { R.shown = 1e4; renderRepos(); };
+}
+let qT; $("#q").addEventListener("input", e => { clearTimeout(qT); qT = setTimeout(() => { R.q = e.target.value.trim(); R.shown = 12; renderRepos(); }, 120); });
+
+/* ---------- scroll behaviour (IntersectionObserver only) ---------- */
+
+new IntersectionObserver(([e]) => $("#nav").classList.toggle("scrolled", !e.isIntersecting), { rootMargin: "-65px 0px 0px 0px" }).observe($("#top"));
+const links = [...document.querySelectorAll("#navlinks a")];
+const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ links.forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + e.target.id)); } }), { rootMargin: "-45% 0px -50% 0px" });
+document.querySelectorAll("main section[id]").forEach(s => spy.observe(s));
+// timeline progress fills as each role enters view
+const jobs = [...document.querySelectorAll(".job")];
+const tl = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) e.target.classList.add("lit"); });
+  const seen = jobs.filter(j => j.classList.contains("lit"));
+  const last = seen[seen.length - 1]; if (!last) return;
+  $("#prog").style.height = (last.offsetTop + 12) + "px";
+  if (!reduce) $("#prog").style.transition = "height .8s cubic-bezier(.16,1,.3,1)";
+}, { threshold: .3 });
+jobs.forEach(j => tl.observe(j));
+
+/* ---------- boot ---------- */
+$("#cap-hint").textContent = HINT;
+applyTheme();
+if (reduce) drawUMAP(); else requestAnimationFrame(animateUMAP);
+let rT; new ResizeObserver(() => { clearTimeout(rT); rT = setTimeout(redrawAll, 80); }).observe(document.body);
+document.fonts?.ready.then(redrawAll);
+loadRepos();
+</script>
+</body>
+</html>
