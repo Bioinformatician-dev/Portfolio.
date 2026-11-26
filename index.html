@@ -119,6 +119,20 @@ section{scroll-margin-top:80px}
 .tag{font:500 12px "Geist Mono",monospace;padding:4px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-2)}
 .tile.c1{background:var(--accent-soft)}
 .tile.c4{background:linear-gradient(135deg,var(--accent-soft),var(--bg) 70%)}
+.tile img.shot{flex:1;min-height:160px;width:100%;object-fit:cover;background:#0d1110}
+.motion{margin-top:80px}
+.motion h3{font-size:1.4rem;letter-spacing:-.02em;font-weight:600}
+.motion .lede{margin-top:6px;font-size:14.5px}
+.reel{margin-top:20px;display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:700px){.reel{grid-template-columns:1fr 1fr}}
+@media (min-width:1080px){.reel{grid-template-columns:1fr 1fr 1fr}}
+.shot-card{display:flex;flex-direction:column;border-radius:var(--r);border:1px solid var(--line);background:var(--bg);overflow:hidden;text-decoration:none;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .35s}
+.shot-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+.shot-card img{width:100%;height:auto;background:#0d1110}
+.shot-card div{padding:14px 18px 16px;border-top:1px solid var(--line);background:var(--surface)}
+.shot-card h4{font-size:1rem;font-weight:600}
+.shot-card p{margin-top:4px;font-size:14px;color:var(--ink-2)}
+.motion .note{margin-top:16px;font-size:13px;color:var(--ink-3)}
 
 .index-head{margin-top:80px;display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px}
 .index-head h3{font-size:1.4rem;letter-spacing:-.02em;font-weight:600}
@@ -281,6 +295,7 @@ section{scroll-margin-top:80px}
       <div class="role mono rv">Selected work</div>
       <h2 class="rv">Pipelines and analyses, open on GitHub.</h2>
       <div class="bento" id="bento"></div>
+      <div class="motion" id="motion"></div>
 
       <div class="index-head">
         <h3>Every repository</h3>
@@ -382,12 +397,21 @@ const SITE = {
     ["2", "peer-reviewed papers, one more under review"],
     ["6", "specialist workshops, including two at MDC-BIMSB Berlin"]
   ],
-  // Featured projects (bento). `plot` picks the generated figure drawn on each tile.
+  // Featured projects (bento). `img` shows an animated GIF; without it, `plot` picks a generated canvas figure.
   featured: [
-    {repo:"single-Cell-RNA-Sequencing", title:"Single-cell RNA-seq pipeline", text:"QC, normalisation, clustering, marker genes and visualisation, end to end.", tags:["scRNA-seq","Seurat","R"], plot:"umap"},
-    {repo:"Cancer-Genomics", title:"Cancer genomics in R", text:"Computational analysis of cancer datasets with Bioconductor workflows.", tags:["Bioconductor","TCGA"], plot:"oncoprint"},
-    {repo:"Data-Integration", title:"Multi-omics integration", text:"ML-ready integrated datasets with downstream predictive analysis.", tags:["multi-omics","Python"], plot:"heatmap"},
-    {repo:"Alzheimer-s-Disease-Classification-", title:"Alzheimer's disease classification", text:"Preprocessing and evaluation across several supervised classifiers.", tags:["scikit-learn","SVM","RF"], plot:"roc"}
+    {repo:"single-Cell-RNA-Sequencing", title:"Single-cell RNA-seq pipeline", text:"QC, normalisation, clustering, marker genes and visualisation, end to end.", tags:["scRNA-seq","Seurat","R"], plot:"umap", img:"assets/scrna_umap.gif", alt:"Animation of cells settling into UMAP clusters"},
+    {repo:"Cancer-Genomics", title:"Cancer genomics in R", text:"Computational analysis of cancer datasets with Bioconductor workflows.", tags:["Bioconductor","TCGA"], plot:"oncoprint", img:"assets/cancer_oncoprint.gif", alt:"Animated oncoprint of gene alterations across tumours"},
+    {repo:"Data-Integration", title:"Multi-omics integration", text:"ML-ready integrated datasets with downstream predictive analysis.", tags:["multi-omics","Python"], plot:"heatmap", img:"assets/integration_heatmap.gif", alt:"Animated heatmap showing shared structure emerging"},
+    {repo:"Alzheimer-s-Disease-Classification-", title:"Alzheimer's disease classification", text:"Preprocessing and evaluation across several supervised classifiers.", tags:["scikit-learn","SVM","RF"], plot:"roc", img:"assets/roc_classifiers.gif", alt:"Animated ROC curves comparing classifiers"}
+  ],
+  // "Analyses in motion" strip under the featured tiles.
+  motion: [
+    {repo:"RNA-Seq-analysis", title:"Differential expression", text:"Volcano plot of bulk RNA-seq contrasts.", img:"assets/rnaseq_volcano.gif"},
+    {repo:"NGS-Genomics-Analysis-Pipeline", title:"NGS variant calling", text:"Read alignment and SNV detection.", img:"assets/ngs_pileup.gif"},
+    {repo:"YOLOv9-for-object-detection-and-counting-", title:"YOLOv9 detection and counting", text:"Cell detection with a live count.", img:"assets/yolo_counting.gif"},
+    {repo:"Biomedical-images-analysis-CNN", title:"CNN for biomedical images", text:"Training and validation curves.", img:"assets/cnn_training.gif"},
+    {repo:"microbiome-16s-pipeline", title:"16S microbiome profiling", text:"Community composition across samples.", img:"assets/microbiome_16s.gif"},
+    {repo:"Needleman-Wunsch-and-Smith-Waterman-Algorithm-using-Python", title:"Sequence alignment", text:"Needleman-Wunsch matrix fill and traceback.", img:"assets/needleman_wunsch.gif"}
   ],
   // Used when GitHub cannot be reached (offline, rate limit, or a sandbox that blocks requests).
   snapshotDate: "2026-10-03",
@@ -457,7 +481,8 @@ $("#timeline").insertAdjacentHTML("beforeend", SITE.experience.map(j => `<li cla
 $("#refs").innerHTML = SITE.publications.map(p => `<li class="ref rv"><div><h3>${esc(p.title)}</h3><p>${esc(p.venue)}</p>${p.doi ? `<a href="https://doi.org/${esc(p.doi)}" target="_blank" rel="noopener">doi.org/${esc(p.doi)}<svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>` : ""}${p.pending ? `<span class="pending">Under review</span>` : ""}</div></li>`).join("");
 $("#degrees").innerHTML = SITE.education.map(d => `<article class="degree rv"><div class="top mono"><span>${esc(d.year)}</span><span>${esc(d.grade)}</span></div><h3>${esc(d.degree)}</h3><div class="school">${esc(d.school)}</div><p class="thesis"><b>Thesis.</b> ${esc(d.thesis)}</p></article>`).join("");
 $("#workshops").innerHTML = SITE.workshops.map(w => `<li><span>${esc(w[0])}</span><div>${esc(w[1])}<small>${esc(w[2])}</small></div></li>`).join("");
-$("#bento").innerHTML = SITE.featured.map((f,i) => `<a class="tile c${i+1} rv" style="--i:${i}" href="${ghURL(f.repo)}" target="_blank" rel="noopener"><canvas data-plot="${f.plot}" aria-hidden="true"></canvas><div class="meta"><h3>${esc(f.title)}<svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></h3><p>${esc(f.text)}</p><div class="tags">${f.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div></div></a>`).join("");
+$("#bento").innerHTML = SITE.featured.map((f,i) => `<a class="tile c${i+1} rv" style="--i:${i}" href="${ghURL(f.repo)}" target="_blank" rel="noopener">${f.img ? `<img class="shot" src="${esc(f.img)}" alt="${esc(f.alt||f.title)}" loading="lazy" width="560" height="340">` : `<canvas data-plot="${f.plot}" aria-hidden="true"></canvas>`}<div class="meta"><h3>${esc(f.title)}<svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></h3><p>${esc(f.text)}</p><div class="tags">${f.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div></div></a>`).join("");
+$("#motion").innerHTML = `<h3>Analyses in motion</h3><p class="lede">Short animations of the workflows behind each project.</p><div class="reel">${SITE.motion.map(m => `<a class="shot-card" href="${ghURL(m.repo)}" target="_blank" rel="noopener"><img src="${esc(m.img)}" alt="${esc(m.title)}: animated illustration" loading="lazy" width="560" height="340"><div><h4>${esc(m.title)}</h4><p>${esc(m.text)}</p></div></a>`).join("")}</div><p class="note">Animations are illustrative visuals generated from simulated data, not results from real datasets.</p>`;
 
 /* ---------- theme ---------- */
 const root = document.documentElement;
@@ -556,7 +581,7 @@ U.cv.addEventListener("click", e => { const i = nearestCluster(e.clientX, e.clie
 
 /* ==================================================================
    TILE FIGURES: small generated plots matching each project type.
-   Swap a <canvas> for a real figure <img> any time.
+   Used for any featured tile that has no `img`.
    ================================================================== */
 function drawTile(cv){
   const [c,w,h] = fit(cv), r = rng(cv.dataset.plot.length * 97);
